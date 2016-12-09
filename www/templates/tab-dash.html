@@ -1,0 +1,32 @@
+<ion-view view-title="Panel principal">
+  <ion-content class="padding">
+    <div class="bar bar-header item-input-inset">
+        <label class="item-input-wrapper">
+            <i class="icon ion-ios-search placeholder-icon"></i>
+            <input type="text" placeholder="Ingrese producto" name="filtro" ng-model="filtro">
+        </label>
+        <button class="button button-small button-positive" ng-click="load_products(filtro)">Buscar</button>
+    </div>
+    <div class="col text-center" ng-show="loading_products">
+        <ion-spinner></ion-spinner>
+    </div>
+    <div class="row">
+        <div class="col">
+            <div class="list" ng-show="!loading_products">
+                <div class="item item-divider">Productos en stock</div>
+                <div class="item" ng-show="products.length > 0 && !loading_products" ng-repeat="product in products">
+                    <h2>{{product.desc_pro | uppercase}}</h2>
+                    <p style="font-size: 8pt">{{product.desc_con}}</p>
+                    <span class="badge badge-assertive">{{product.stock_pro | number:2}}</span>
+                </div>
+                <div class="item" ng-show="products.length == 0 && !loading_products">
+                    No existe productos con stock
+                </div>
+            </div>
+            <div class="col text-center" ng-show="products.length > 0 && !loading_products">
+                Total de productos : <span class="badge badge-energized">{{products.length}}</span>
+            </div>
+        </div>
+    </div>
+  </ion-content>
+</ion-view>
